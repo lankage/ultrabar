@@ -1,0 +1,81 @@
+- content_for :pagetitle do
+  .col-sm-12
+    %h1 Users
+
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Usage Data
+  .panel-body
+    #signin-bar-chart{style: 'height: 200px;'}
+
+%table.table.table-striped#users{style: 'width: 100%;'}
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th Email
+      %th Role
+      %th Actions
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= link_to user.display_name, user
+        %td= user.email
+        %td
+          - if policy(user).update?
+            = bootstrap_form_for user, layout: :inline do |f|
+              = f.select :role, User.roles.keys.map {|role| [role.titleize,role]}, {hide_label: true}, {class: 'input-sm'}
+              = f.submit 'Change Role', class: 'btn btn-default btn-sm'
+          - else
+            = user.role
+        %td
+          = link_to 'Destroy', user, method: :delete, 'data-confirm': 'Are you sure?' if policy(user).destroy?
+
+:javascript
+  $(document).ready(function(){
+    var table = $('#users').DataTable({
+                  'pageLength': 25,
+                  'columnDefs':[
+                    {
+                      'targets': [0],
+                      'visible': false
+                    }
+                  ]
+                });
+
+    fetchData(table);
+    $('#users').on('page.dt', function(){
+      fetchData(table);
+    });
+  });
+
+
+  var chart = Morris.Bar({
+    element: 'signin-bar-chart',
+    resize: true,
+    data: [
+      {username: '', signin: null}
+    ],
+    xkey: 'username',
+    ykeys: ['signin'],
+    labels: ['Sign ins']
+  });
+
+  function fetchData(table){
+    var data = table.columns(0, {page: 'current'}).data().eq(0).unique();
+    var ids = Array.from(data);
+
+    $.ajax({
+      type: 'GET',
+      url: '/users/get',
+      dataType: 'json',
+      data: {
+        ids: ids,
+        option: 'signin_count'
+      },
+      success: function(response){
+        chart.setData(response);
+      }
+    });
+  }

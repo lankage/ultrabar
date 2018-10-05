@@ -1,0 +1,52 @@
+allenv: &ALLENV
+  enabled: true
+  host: uw-dc1.glbrc.org
+  port: 636
+  base: 'dc=glbrc,dc=org'
+  domain: glbrc.org
+  reset_link: https://pass.glbrc.org
+  reset_email: helpdesk@glbrc.org
+
+production:
+  <<: *ALLENV
+
+development:
+  <<: *ALLENV
+
+test:
+  <<: *ALLENV
+
+# authorizations:
+#   group_base: "ou=groups,dc=test,dc=com"
+# development:
+#   admin_password: "@p@ch31d@p"
+#   admin_user: "CN=Apache LDAP,OU=Users,OU=Non-GLBRC People,DC=glbrc,DC=org"
+#   attribute: sAMAccountName
+#   base: "ou=GLBRC,dc=glbrc,dc=org"
+#   host: uw-dc3.glbrc.org
+#   port: 636
+#   ssl: true
+# version:
+#   admin_password: "@p@ch31d@p"
+#   admin_user: "CN=Apache LDAP,OU=Users,OU=Non-GLBRC People,DC=glbrc,DC=org"
+#   attribute: sAMAccountName
+#   base: "ou=GLBRC,dc=glbrc,dc=org"
+#   host: uw-dc3.glbrc.org
+#   port: 636
+#   ssl: true
+# production:
+#   admin_password: "@p@ch31d@p"
+#   admin_user: "CN=Apache LDAP,OU=Users,OU=Non-GLBRC People,DC=glbrc,DC=org"
+#   attribute: sAMAccountName
+#   base: "ou=GLBRC,dc=glbrc,dc=org"
+#   host: uw-dc3.glbrc.org
+#   port: 636
+#   ssl: true
+# test:
+#   admin_password: "@p@ch31d@p"
+#   admin_user: "CN=Apache LDAP,OU=Users,OU=Non-GLBRC People,DC=glbrc,DC=org"
+#   attribute: sAMAccountName
+#   base: "ou=GLBRC,dc=glbrc,dc=org"
+#   host: uw-dc3.glbrc.org
+#   port: 636
+#   ssl: true

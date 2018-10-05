@@ -1,0 +1,16 @@
+- title ||= nil
+- count ||= false
+.col-md-2.col-sm-6
+  = link_to "/#{resource}" do
+    .panel.panel-default{style: "border-color: #{color}"}
+      .panel-heading{style: "color: white; background-color: #{color};"}
+        .row
+          .col-xs-2= fa_icon(icon + ' 5x')
+          .col-xs-10.text-right
+            .huge= count ? resource.split('?')[0].classify.constantize.count : '&nbsp;'.html_safe
+            %div= title || resource.capitalize
+      .panel-footer{style: "color: #{color};"}
+        %span.pull-left View Details
+        %span.pull-right
+          %i.fa.fa-arrow-circle-right
+        .clearfix

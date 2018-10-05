@@ -1,0 +1,26 @@
+.row
+  .col-md-offset-4.col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Edit #{resource_name.to_s.humanize}
+      .panel-body
+        = bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f|
+          = f.text_field :name, autofocus: true
+          = f.email_field :email
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %div
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          %fieldset
+            %p Leave these fields blank if you don't want to change your password.
+            = f.password_field :password, autocomplete: :off
+            = f.password_field :password_confirmation
+          %fieldset
+            %p You must enter your current password to make changes.
+            = f.password_field :current_password
+          = f.submit 'Update', :class => 'btn btn-success btn-block'
+  .col-md-offset-4.col-md-4
+    .panel.panel-default
+      .panel-heading
+        %h1.panel-title Cancel Account
+      .panel-body
+        = button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger btn-block'

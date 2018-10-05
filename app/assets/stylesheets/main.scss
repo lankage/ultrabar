@@ -1,0 +1,56 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome';
+@import 'dropzone/dropzone';
+@import 'dataTables/bootstrap/3/jquery.dataTables.bootstrap';
+
+* {
+  font-size: 15px;
+}
+
+.page-header {
+  margin-top: 10px !important;
+
+  #item-bar {
+    @extend .clearfix;
+    margin-top: 10px;
+    a:not(.dropdown-menu a) {
+      margin: 1em 1em 0 0;
+    }
+    .dropdown {
+      display: inline-block;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 90px;
+  padding: 0px 120px 0px 0px;
+  margin: 0px 0px 0px 120px;
+  z-index: 2147483647;
+}
+.center {
+  margin: 0 auto; width: 852px;
+}
+.center-btn {
+  margin: 0px 0px 0px 260px;
+}
+
+.video {
+  z-index: 1;
+
+}
+
+.tiles .panel {
+  cursor: pointer;
+  transition: box-shadow 200ms;
+  &:hover {
+    box-shadow: 3px 0px 20px rgba(0,0,0, .2);
+  }
+}
+
+.citation {
+  margin: 10px 10px 10px 10px;
+
+}

@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : 'FitCityXT'
+    %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'FitCityXT'}"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = favicon_link_tag ''
+  %body{data: {controller: params[:controller], action: params[:action]}}
+    #wrapper{style: 'background-color: #f2f6f9;'}
+      %header
+        = render 'layouts/navigation'
+      %main{role: "main"}
+        #page-wrapper
+          .container-fluid{style: 'padding: 0 5%;'}
+            - if content_for?(:pagetop)
+              .page-header= yield :pagetop
+            - elsif content_for?(:pagetitle) || content_for?(:itembar)
+              .page-header
+                .row
+                  .col-xs-6= yield :pagetitle if content_for?(:pagetitle)
+                  .col-xs-6#item-bar.text-right= yield :itembar if content_for?(:itembar)
+            = render 'layouts/messages'
+            = yield
+    %footer
+      = render 'layouts/footer'

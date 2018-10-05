@@ -1,0 +1,20 @@
+#need-help-modal.modal.fade{role: 'dialog', tabindex: -1}
+  .modal-dialog
+    .modal-content
+      = bootstrap_form_for Message.new do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss': 'modal'}
+            &times;
+          %h4.modal-title
+            Message WEI Helpdesk
+        .modal-body
+          = f.text_field :name, value: current_user.try(:display_name), readonly: user_signed_in?
+          = f.email_field :email, value: current_user.try(:email), readonly: user_signed_in?
+          = f.text_area :content, placeholder: 'Your Message', label: 'Message'
+          %hr
+          .row
+            .col-sm-6
+              = f.submit 'Send', class: 'btn btn-success'
+            .col-sm-6.text-right
+              %button.btn.btn-default{type: 'button', 'data-dismiss': 'modal'}
+                Close

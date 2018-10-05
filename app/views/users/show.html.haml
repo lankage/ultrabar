@@ -1,0 +1,19 @@
+- content_for :pagetitle do
+  %h1 User: #{@user.display_name}
+
+- content_for :itembar do
+  = link_to 'Back', :back, class: 'btn btn-default'
+
+.row
+  .col-sm-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title Details
+      .panel-body
+        %p
+          %strong Name:
+          = @user.display_name
+        %p
+          %strong Email:
+          = @user.email
+  .col-sm-6
